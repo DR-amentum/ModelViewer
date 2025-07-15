@@ -2,6 +2,29 @@ import streamlit as st
 import pandas as pd
 import re
 from pathlib import Path
+import hashlib
+
+PASSWORD_HASH = d96d2f96fdc33dbc15fd3512a1f01beb0c01449f495db9e79e59ffce6b5aceaf
+
+def check_password():
+    """Password-protected access using Streamlit session state"""
+    if "authenticated" not in st.session_state:
+        st.session_state.authenticated = False
+
+    if st.session_state.authenticated:
+        return True
+
+    st.sidebar.markdown("## 🔐 Login Required")
+    password = st.sidebar.text_input("Enter password", type="password")
+
+    if password:
+        if hashlib.sha256(password.encode()).hexdigest() == PASSWORD_HASH:
+            st.session_state.authenticated = True
+            st.rerun()  # Rerun to hide the input box
+        else:
+            st.sidebar.error("Incorrect password")
+
+    return False
 
 MODEL_RUNS_DIR = Path("model_runs")
 
