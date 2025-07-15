@@ -25,7 +25,8 @@ def check_password():
             st.sidebar.error("Incorrect password")
 
     return False
-
+if not check_password():
+    st.stop()
 MODEL_RUNS_DIR = Path("model_runs")
 
 def normalise_building(name):
