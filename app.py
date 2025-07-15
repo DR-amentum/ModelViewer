@@ -4,7 +4,7 @@ import re
 from pathlib import Path
 import hashlib
 
-PASSWORD_HASH = d96d2f96fdc33dbc15fd3512a1f01beb0c01449f495db9e79e59ffce6b5aceaf
+PASSWORD_HASH = "d96d2f96fdc33dbc15fd3512a1f01beb0c01449f495db9e79e59ffce6b5aceaf"
 
 def check_password():
     """Password-protected access using Streamlit session state"""
